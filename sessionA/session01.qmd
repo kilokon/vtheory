@@ -1,0 +1,322 @@
+---
+title: "Introduction To CGI Asset Management"
+subtitle: "Pragmatic and contextual VFX pipeline infrastructure with emphasis on studio practices"
+---
+
+# Concepts and Terminology { .smaller }
+(All VFX involve CGI today, but not all CGI is part of a VFX process.)
+
+## Computer-Generated Imagery (CGI)  {.smaller transition="fade" transition-speed="fast"}
+::: {.incremental}
+- Technology roots trace back to the 1960s.
+- Term "CGI" was coined to distinguish computer-created visual content from traditional hand-drawn animation and practical effects.
+- CGI encompasses various techniques including 3D modeling, digital compositing, motion capture, etc.
+- The term has evolved to include both photorealistic and stylized digital content across transmedia platforms.
+:::
+
+---
+
+::: columns
+::: {.column width="33%"}
+![](https://www.researchgate.net/publication/337096947/figure/fig7/AS:822781360996353@1573177771069/an-Sutherland-utilizando-el-programa-Sketchpad-en-la-consola-TX-2-en-el-Lincoln.png){width="300" height="300"}
+Ivan Sutherland's Sketchpad (1963)
+:::
+::: {.column width="33%"}
+{{< video https://www.youtube.com/watch?v=0a88Ixuv084&t=40s width="300" height="300" >}}
+Earliest instances of a visual flight simulator
+:::
+
+::: {.column width="33%"}
+![](https://cdn10.picryl.com/photo/1986/03/25/a-close-up-view-of-the-short-range-radar-display-inside-the-berlin-air-route-2954d1-1600.jpg){width="300" height="270"}
+The earliest computer graphics applications were military-focused.
+:::
+:::
+
+## Visual Effects (VFX) {.smaller transition="fade" transition-speed="fast"}
+::: {.incremental}
+- 1890s-1920s: "Trick Photography" or "Photographic Effects"
+- 1930s-1960s: "Special Effects" (covering both practical and optical effects)
+- 1970s-1980s: "Optical Effects" for post-production work
+- 1990s: "Visual Effects" (VFX) becomes standard industry terminology
+- 2000s: Sub-categories emerge (Digital VFX, Practical VFX, Hybrid VFX)
+- 2010s: "Digital Effects," "Post-VFX," and "Virtual Production" terminology
+:::
+
+## Modern VFX Categories {.smaller }
+
+- Compositing: Combining multiple image elements
+- Matte Painting: Creating digital backgrounds and environments
+- Motion Capture: Recording actor movements for digital characters
+- Simulation: Physics-based effects (water, fire, destruction)
+- Digital Doubles: CGI replicas of actors
+- Virtual Production: Real-time VFX during filming
+
+## CGI Vs VFX { .smaller }
+- CGI is the digital content creation aspect.
+- VFX is the composite process that integrates CGI with real-world footage and effects.
+
+
+## Artificial Intelligence {.smaller}
+
+- Rotoscoping (e.g., AI roto in Nuke, After Effects)
+- Asset creation (e.g., AI-generated textures, models)
+- Animation (e.g., markerless motion capture)
+- Compositing (e.g., segmentation, relighting, upscaling)
+- Shot planning (e.g., generative storyboards, previs)
+
+:::{.fragment .fade-in}
+Some tools that are in use:
+:::
+
+:::{.incremental}
+- https://radicalmotion.com
+- https://lumalabs.ai
+:::
+
+# Role Of CGI in VFx { .smaller }
+::: {.incremental}
+- CGI in Films
+- CGI in Episodes (Television series, OTT series, etc)
+- CGI in Ads
+- CGI in Games
+:::
+
+## CGI in Films { .smaller }
+
+- "Westworld" (1973)
+- "Futureworld" (1976)
+- "Star Wars" (1977)
+- "Tron" (1982)
+- "The Last Starfighter" (1984)
+- "Young Sherlock Holmes" (1985)
+- "Toy Story" (1995)
+- "Jurassic Park" (1993)
+- "The Matrix" (1999)
+- "Avatar" (2009)
+- "The Jungle Book" (2016)
+
+---
+{{< video https://youtu.be/MB7YIYER9hk width="290" height="290" >}}
+{{< video https://www.youtube.com/watch?v=yYDVXWJf-_k title="Tron(1982)" start="60"  width="290" height="290" >}}
+{{< video https://www.youtube.com/watch?v=4zlkFcGEv9g title="Futureworld(1976)" width="290" height="290" >}}
+{{< video https://youtu.be/iB9KoJ79tGY title="Young Sherlock Holmes(1985)" width="290" height="290" >}}
+{{< video https://youtu.be/z46qTkQsklQ title="Avatar(2009)" width="290" height="290" >}}
+{{< video https://youtu.be/H_VoI4LWiDI title="The Jungle Book(2016)" width="290" height="290" >}}
+
+## CGI in Episodes (Television series, OTT series, etc) { .smaller }
+- {{< video  https://www.youtube.com/watch?v=7Ks8rUoBYhY title="Max Headroom (1987)"  width="350" height="350" >}}
+- "The X-Files" (1993-2002)
+- "Game of Thrones" (2011-2019)
+- "The Mandalorian" (2019-present)
+- "Stranger Things" (2016-present)
+
+## CGI in Advertisements
+{{< video https://www.youtube.com/watch?v=47Dlkfg9Jhk width="350" height="350" >}}
+{{< video https://www.youtube.com/watch?v=IN_jaxNjr6k width="350" height="350" >}}
+
+
+## CGI in Games { .smaller .nostreatch }
+
+<!-- ::: {layout-nrow=1} -->
+::: {layout="[[1,1,1]]"}
+![Spacewar 1962](https://i.ytimg.com/vi/1EWQYAfuMYw/maxresdefault.jpg)
+
+![Pong 1972](https://i.pinimg.com/736x/2b/7f/60/2b7f60d383cb38814f5c1534c9e42706--arcade-machine-first-video.jpg){height=40%}
+
+![Doom 1993](https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2280/ss_c8f0c20768412066cd1e182705b14d26acc4beb0.1920x1080.jpg?t=1709155730)
+:::
+
+{{< video https://youtu.be/GTRRJkfo5Xs width="330" height="200">}}
+
+# Pipeline{.smaller}
+(structured flow of data, assets, and tasks across departments using tools, scripts, and file conventions.)
+
+## VFX Pipeline {.smaller background="#43464B" background-image="imgs/mermaid-diagram-2025-07-14-065730.png" background-size="75%"}
+
+:::: {.columns}
+
+::: {.column width="30%"}
+Pre-production
+
+- Concept 
+- Previs
+- Production Planning
+- Technical planning 
+:::
+
+::: {.column width="30%"}
+Production
+
+- Asset creation
+- Layout
+- Animation
+- FX
+- Lighting
+:::
+
+::: {.column width="30%"}
+Post-production
+
+- Compositing
+- Color Grading
+:::
+
+::::
+
+## AI in the Pipeline {.smaller}
+
+| Stage           | AI Role                                      | Tools / Frameworks                     |
+|-----------------|----------------------------------------------|----------------------------------------|
+| **Pre-production** | Concept generation, previs                 | Sora, DALL·E, Midjourney               |
+| **Modeling**      | Shape generation, photogrammetry, retopo   | Kaedim, Meshy, Luma AI                 |
+| **Texturing**     | Procedural texturing, upscaling, inpainting | Adobe Firefly, AI Texture synthesis    |
+| **Animation**     | Markerless mocap, facial AI                | DeepMotion, RADiCAL, Wav2Lip           |
+| **Compositing**   | Auto roto, relighting, segmentation        | Runway ML, Nuke + CopyCat              |
+
+## Pipeline Architecture {.smaller }
+A pipeline architecture in VFX defines the structured flow of data, assets, and tasks across departments using tools, scripts, and file conventions.
+Pipelines are relevant to project management, especially in domains like VFX, animation, game development, and software engineering.
+
+::: {.incremental}
+- Modular: each department functions as a module
+- Version-controlled: assets and scenes track revisions
+- Automated: scripts and tools handle repetitive tasks
+- Cross-software: Maya, Houdini, Nuke, etc., integrated
+- Scalable: from indie studios to multi-site facilities
+:::
+
+## Digital Production Pipelines {.smaller}
+
+:::{.nonincremental}
+- Linear [Tasks follow a strict sequence (Waterfall model)].
+- Non-linear or General [Tasks run in parallel or with iterative loops].
+:::
+
+![](imgs/mermaid-diagram-2025-07-14-072516.png)
+
+
+# Asset Types and Terminology {.smaller}
+:::{.fragment .fade-in}
+An asset in VFX refers to any reusable production element—characters, props, environments, vehicles, etc.
+:::
+
+:::{.incremental}
+- Models
+- Textures
+- Lookdev (Renders)
+- Rigs
+- Animations (Anim Cache)
+- Plates
+- Scan Data
+:::
+
+
+## {.smaller}
+
+
+| Category          | Description                                      | Examples                     |
+|-------------------|------------------------------------------------|-----------------------------|
+| **Hero Assets**   | High-detail, focus objects requiring meticulous modeling/texturing. | Main characters, key props. |
+| **Background Assets** | Environment fillers, optimized for performance. | Crowds, foliage, distant buildings. |
+| **FX Assets**     | Dynamic elements like fire, smoke, or particle systems. | Explosions, weather effects. |
+
+
+:::{.fragment .fade-in}
+
+| Asset Type       | Key Characteristics                          | Common Examples         |
+|------------------|---------------------------------------------|-------------------------|
+| **Static Assets** | No deformation; optimized for texture resolution and LOD | Buildings, furniture    |
+| **Dynamic Assets** | Require rigging, skinning, and animation-friendly topology | Characters, vehicles, cloth |
+
+:::
+
+::: {.fragment .fade-in}
+Production Note: 
+"Static object modeling prioritizes photogrammetric accuracy and modular reuse, reducing asset generation time in large-scale environments."
+:::
+
+## Real world use of assets {.smaller .scrollable}
+{{< video imgs/the_eternauts_vfx_breakdown.mp4 width="900" height="540">}}
+{{< video https://www.youtube.com/watch?v=jkah3djGJ7g width="900" height="540" >}}
+
+# Asset Lifecycle {.smaller}
+
+::: {.fragment .fade-in}
+![](imgs/concepttoprod.png){width=69%}
+:::
+
+## General Cycle of a 3D asset {.smaller}
+
+```
+Concept → Modeling → Texturing → Rigging → LookDev → Approval → Publishing → Integration → Final Render
+                         ↑                 ↓
+                    Versioning ← QA/Feedback ← Revisions
+```
+
+## Art Directing Assets
+Art directing an asset is the process of shaping its design, form, style, and visual qualities through feedback and decision-making by an art director, ensuring it fits the visual language and narrative tone of the production.
+
+## Caching {.smaller}
+Caching is saving a snapshot of the work.
+
+
+## Versioning
+Asset production is iterative, with changes tracked and managed systematically.
+
+
+## Publishing
+Publihing is the act of finalizing and distributing an asset for downstream use. 
+
+:::{.fragment .fade-in}
+An artist/department in the pipeline publishes a version of the asset. The the feedback cycle might 
+give a retake on the asset or approve it.
+:::
+
+:::{.incremental}
+- Artist Fidelity
+- Performance Optimization
+- Asset approval leads, supervisors, directors.
+:::
+
+## Feedback Cycle {.smaller} 
+
+![](./imgs/asset_feedback_cycle.png){fig-align="center"}
+
+Approval Conditions: \
+
+- ✅ Approved → Asset is published
+- 🔁 Retake → Feedback is passed down the chain for revision
+- 📌 Conditional Approval → Used but flagged for future fixes
+
+## Asset Status Tracking {.smaller}
+![Kitsu]( https://www.cg-wire.com/_nuxt/kitsu-start.f8deb93a.png){.fig-align="center" }
+
+# File Structure and Naming Conventions {.smaller}
+```
+{show}/{seq}/{shot}/assets/{asset_type}/{asset_name}/v###/<asset_name_version.extension>)
+```
+
+##
+
+# Pipeline Tools
+
+## Job Schedulers {.smaller .scrollable }
+![Flamenco](https://flamenco.blender.org/images/flamenco_screenshot_01.webp)
+![Pandora](https://prism-pipeline.com/wp-content/uploads/2018/03/RH004c.jpg)
+
+
+# Modelling Pipeline
+
+## Methods
+
+## Topology Standards
+
+## DCCs
+
+# Texturing Pipeline
+
+## Methods
+
+## UDIM Workflows
+
+

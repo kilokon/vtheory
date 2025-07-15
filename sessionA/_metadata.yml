@@ -1,0 +1,10 @@
+format:
+  revealjs:
+    theme: moon
+    menu: true
+    progress: true
+    slide-number: true
+    footer: '[https://{{< meta prerelease-subdomain >}}quarto.org](https://{{< meta prerelease-subdomain >}}quarto.org)'
+    chalkboard: 
+      buttons: false
+search: false

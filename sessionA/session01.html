@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="session01_files/libs/clipboard/clipboard.min.js"></script>
+<script src="session01_files/libs/quarto-html/tabby.min.js"></script>
+<script src="session01_files/libs/quarto-html/popper.min.js"></script>
+<script src="session01_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="session01_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="session01_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="session01_files/libs/quarto-html/quarto-syntax-highlighting-dark-b06c2fb8b73b9a0714fcfc24b71f34e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="session01_files/libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="session01_files/libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
+
+  <title>Introduction To CGI Asset Management</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="session01_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="session01_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="session01_files/libs/revealjs/dist/theme/quarto-0c8acc74dca0c2faaedea4940f202713.css">
+  <link href="session01_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="session01_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="session01_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="session01_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="session01_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="session01_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Introduction To CGI Asset Management</h1>
+  <p class="subtitle">Pragmatic and contextual VFX pipeline infrastructure with emphasis on studio practices</p>
+
+<div class="quarto-title-authors">
+</div>
+
+</section>
+<section>
+<section id="concepts-and-terminology" class="title-slide slide level1 smaller center">
+<h1>Concepts and Terminology</h1>
+<p>(All VFX involve CGI today, but not all CGI is part of a VFX process.)</p>
+</section>
+<section id="computer-generated-imagery-cgi" class="slide level2 smaller" data-transition="fade" data-transition-speed="fast">
+<h2>Computer-Generated Imagery (CGI)</h2>
+<ul>
+<li class="fragment">Technology roots trace back to the 1960s.</li>
+<li class="fragment">Term “CGI” was coined to distinguish computer-created visual content from traditional hand-drawn animation and practical effects.</li>
+<li class="fragment">CGI encompasses various techniques including 3D modeling, digital compositing, motion capture, etc.</li>
+<li class="fragment">The term has evolved to include both photorealistic and stylized digital content across transmedia platforms.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><img data-src="https://www.researchgate.net/publication/337096947/figure/fig7/AS:822781360996353@1573177771069/an-Sutherland-utilizando-el-programa-Sketchpad-en-la-consola-TX-2-en-el-Lincoln.png" width="300" height="300"> Ivan Sutherland’s Sketchpad (1963)</p>
+</div><div class="column" style="width:33%;">
+<p><iframe data-external="1" src="https://www.youtube.com/embed/0a88Ixuv084" width="300" height="300" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> Earliest instances of a visual flight simulator</p>
+</div><div class="column" style="width:33%;">
+<p><img data-src="https://cdn10.picryl.com/photo/1986/03/25/a-close-up-view-of-the-short-range-radar-display-inside-the-berlin-air-route-2954d1-1600.jpg" width="300" height="270"> The earliest computer graphics applications were military-focused.</p>
+</div></div>
+</section>
+<section id="visual-effects-vfx" class="slide level2 smaller" data-transition="fade" data-transition-speed="fast">
+<h2>Visual Effects (VFX)</h2>
+<ul>
+<li class="fragment">1890s-1920s: “Trick Photography” or “Photographic Effects”</li>
+<li class="fragment">1930s-1960s: “Special Effects” (covering both practical and optical effects)</li>
+<li class="fragment">1970s-1980s: “Optical Effects” for post-production work</li>
+<li class="fragment">1990s: “Visual Effects” (VFX) becomes standard industry terminology</li>
+<li class="fragment">2000s: Sub-categories emerge (Digital VFX, Practical VFX, Hybrid VFX)</li>
+<li class="fragment">2010s: “Digital Effects,” “Post-VFX,” and “Virtual Production” terminology</li>
+</ul>
+</section>
+<section id="modern-vfx-categories" class="slide level2 smaller">
+<h2>Modern VFX Categories</h2>
+<ul>
+<li>Compositing: Combining multiple image elements</li>
+<li>Matte Painting: Creating digital backgrounds and environments</li>
+<li>Motion Capture: Recording actor movements for digital characters</li>
+<li>Simulation: Physics-based effects (water, fire, destruction)</li>
+<li>Digital Doubles: CGI replicas of actors</li>
+<li>Virtual Production: Real-time VFX during filming</li>
+</ul>
+</section>
+<section id="cgi-vs-vfx" class="slide level2 smaller">
+<h2>CGI Vs VFX</h2>
+<ul>
+<li>CGI is the digital content creation aspect.</li>
+<li>VFX is the composite process that integrates CGI with real-world footage and effects.</li>
+</ul>
+</section>
+<section id="artificial-intelligence" class="slide level2 smaller">
+<h2>Artificial Intelligence</h2>
+<ul>
+<li>Rotoscoping (e.g., AI roto in Nuke, After Effects)</li>
+<li>Asset creation (e.g., AI-generated textures, models)</li>
+<li>Animation (e.g., markerless motion capture)</li>
+<li>Compositing (e.g., segmentation, relighting, upscaling)</li>
+<li>Shot planning (e.g., generative storyboards, previs)</li>
+</ul>
+<div class="fragment fade-in">
+<p>Some tools that are in use:</p>
+</div>
+<ul>
+<li class="fragment">https://radicalmotion.com</li>
+<li class="fragment">https://lumalabs.ai</li>
+</ul>
+</section></section>
+<section>
+<section id="role-of-cgi-in-vfx" class="title-slide slide level1 smaller center">
+<h1>Role Of CGI in VFx</h1>
+<ul>
+<li class="fragment">CGI in Films</li>
+<li class="fragment">CGI in Episodes (Television series, OTT series, etc)</li>
+<li class="fragment">CGI in Ads</li>
+<li class="fragment">CGI in Games</li>
+</ul>
+</section>
+<section id="cgi-in-films" class="slide level2 smaller">
+<h2>CGI in Films</h2>
+<ul>
+<li>“Westworld” (1973)</li>
+<li>“Futureworld” (1976)</li>
+<li>“Star Wars” (1977)</li>
+<li>“Tron” (1982)</li>
+<li>“The Last Starfighter” (1984)</li>
+<li>“Young Sherlock Holmes” (1985)</li>
+<li>“Toy Story” (1995)</li>
+<li>“Jurassic Park” (1993)</li>
+<li>“The Matrix” (1999)</li>
+<li>“Avatar” (2009)</li>
+<li>“The Jungle Book” (2016)</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p><iframe data-external="1" src="https://www.youtube.com/embed/MB7YIYER9hk" width="290" height="290" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> <iframe data-external="1" src="https://www.youtube.com/embed/yYDVXWJf-_k?start=60" width="290" height="290" title="Tron(1982)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> <iframe data-external="1" src="https://www.youtube.com/embed/4zlkFcGEv9g" width="290" height="290" title="Futureworld(1976)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> <iframe data-external="1" src="https://www.youtube.com/embed/iB9KoJ79tGY" width="290" height="290" title="Young Sherlock Holmes(1985)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> <iframe data-external="1" src="https://www.youtube.com/embed/z46qTkQsklQ" width="290" height="290" title="Avatar(2009)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> <iframe data-external="1" src="https://www.youtube.com/embed/H_VoI4LWiDI" width="290" height="290" title="The Jungle Book(2016)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></p>
+</section>
+<section id="cgi-in-episodes-television-series-ott-series-etc" class="slide level2 smaller">
+<h2>CGI in Episodes (Television series, OTT series, etc)</h2>
+<ul>
+<li><iframe data-external="1" src="https://www.youtube.com/embed/7Ks8rUoBYhY" width="350" height="350" title="Max Headroom (1987)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></li>
+<li>“The X-Files” (1993-2002)</li>
+<li>“Game of Thrones” (2011-2019)</li>
+<li>“The Mandalorian” (2019-present)</li>
+<li>“Stranger Things” (2016-present)</li>
+</ul>
+</section>
+<section id="cgi-in-advertisements" class="slide level2">
+<h2>CGI in Advertisements</h2>
+<p><iframe data-external="1" src="https://www.youtube.com/embed/47Dlkfg9Jhk" width="350" height="350" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe> <iframe data-external="1" src="https://www.youtube.com/embed/IN_jaxNjr6k" width="350" height="350" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></p>
+</section>
+<section id="cgi-in-games" class="slide level2 smaller nostreatch">
+<h2>CGI in Games</h2>
+<!-- ::: {layout-nrow=1} -->
+<div class="quarto-layout-panel" data-layout="[[1,1,1]]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://i.ytimg.com/vi/1EWQYAfuMYw/maxresdefault.jpg"></p>
+<figcaption>Spacewar 1962</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://i.pinimg.com/736x/2b/7f/60/2b7f60d383cb38814f5c1534c9e42706--arcade-machine-first-video.jpg" style="height:40.0%"></p>
+<figcaption>Pong 1972</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2280/ss_c8f0c20768412066cd1e182705b14d26acc4beb0.1920x1080.jpg?t=1709155730"></p>
+<figcaption>Doom 1993</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<iframe data-external="1" src="https://www.youtube.com/embed/GTRRJkfo5Xs" width="330" height="200" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section></section>
+<section>
+<section id="pipeline" class="title-slide slide level1 smaller center">
+<h1>Pipeline</h1>
+<p>(structured flow of data, assets, and tasks across departments using tools, scripts, and file conventions.)</p>
+</section>
+<section id="vfx-pipeline" class="slide level2 smaller" data-background="#43464B" data-background-image="imgs/mermaid-diagram-2025-07-14-065730.png" data-background-size="75%">
+<h2>VFX Pipeline</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p>Pre-production</p>
+<ul>
+<li>Concept</li>
+<li>Previs</li>
+<li>Production Planning</li>
+<li>Technical planning</li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p>Production</p>
+<ul>
+<li>Asset creation</li>
+<li>Layout</li>
+<li>Animation</li>
+<li>FX</li>
+<li>Lighting</li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p>Post-production</p>
+<ul>
+<li>Compositing</li>
+<li>Color Grading</li>
+</ul>
+</div></div>
+</section>
+<section id="ai-in-the-pipeline" class="slide level2 smaller">
+<h2>AI in the Pipeline</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 44%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stage</th>
+<th>AI Role</th>
+<th>Tools / Frameworks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Pre-production</strong></td>
+<td>Concept generation, previs</td>
+<td>Sora, DALL·E, Midjourney</td>
+</tr>
+<tr class="even">
+<td><strong>Modeling</strong></td>
+<td>Shape generation, photogrammetry, retopo</td>
+<td>Kaedim, Meshy, Luma AI</td>
+</tr>
+<tr class="odd">
+<td><strong>Texturing</strong></td>
+<td>Procedural texturing, upscaling, inpainting</td>
+<td>Adobe Firefly, AI Texture synthesis</td>
+</tr>
+<tr class="even">
+<td><strong>Animation</strong></td>
+<td>Markerless mocap, facial AI</td>
+<td>DeepMotion, RADiCAL, Wav2Lip</td>
+</tr>
+<tr class="odd">
+<td><strong>Compositing</strong></td>
+<td>Auto roto, relighting, segmentation</td>
+<td>Runway ML, Nuke + CopyCat</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pipeline-architecture" class="slide level2 smaller">
+<h2>Pipeline Architecture</h2>
+<p>A pipeline architecture in VFX defines the structured flow of data, assets, and tasks across departments using tools, scripts, and file conventions. Pipelines are relevant to project management, especially in domains like VFX, animation, game development, and software engineering.</p>
+<ul>
+<li class="fragment">Modular: each department functions as a module</li>
+<li class="fragment">Version-controlled: assets and scenes track revisions</li>
+<li class="fragment">Automated: scripts and tools handle repetitive tasks</li>
+<li class="fragment">Cross-software: Maya, Houdini, Nuke, etc., integrated</li>
+<li class="fragment">Scalable: from indie studios to multi-site facilities</li>
+</ul>
+</section>
+<section id="digital-production-pipelines" class="slide level2 smaller">
+<h2>Digital Production Pipelines</h2>
+<ul>
+<li>Linear [Tasks follow a strict sequence (Waterfall model)].</li>
+<li>Non-linear or General [Tasks run in parallel or with iterative loops].</li>
+</ul>
+
+<img data-src="imgs/mermaid-diagram-2025-07-14-072516.png" class="r-stretch"></section></section>
+<section>
+<section id="asset-types-and-terminology" class="title-slide slide level1 smaller center">
+<h1>Asset Types and Terminology</h1>
+<div class="fragment fade-in">
+<p>An asset in VFX refers to any reusable production element—characters, props, environments, vehicles, etc.</p>
+</div>
+<ul>
+<li class="fragment">Models</li>
+<li class="fragment">Textures</li>
+<li class="fragment">Lookdev (Renders)</li>
+<li class="fragment">Rigs</li>
+<li class="fragment">Animations (Anim Cache)</li>
+<li class="fragment">Plates</li>
+<li class="fragment">Scan Data</li>
+</ul>
+</section>
+<section id="section" class="slide level2 smaller">
+<h2></h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 50%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Description</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Hero Assets</strong></td>
+<td>High-detail, focus objects requiring meticulous modeling/texturing.</td>
+<td>Main characters, key props.</td>
+</tr>
+<tr class="even">
+<td><strong>Background Assets</strong></td>
+<td>Environment fillers, optimized for performance.</td>
+<td>Crowds, foliage, distant buildings.</td>
+</tr>
+<tr class="odd">
+<td><strong>FX Assets</strong></td>
+<td>Dynamic elements like fire, smoke, or particle systems.</td>
+<td>Explosions, weather effects.</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment fade-in">
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 51%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Asset Type</th>
+<th>Key Characteristics</th>
+<th>Common Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Static Assets</strong></td>
+<td>No deformation; optimized for texture resolution and LOD</td>
+<td>Buildings, furniture</td>
+</tr>
+<tr class="even">
+<td><strong>Dynamic Assets</strong></td>
+<td>Require rigging, skinning, and animation-friendly topology</td>
+<td>Characters, vehicles, cloth</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment fade-in">
+<p>Production Note: “Static object modeling prioritizes photogrammetric accuracy and modular reuse, reducing asset generation time in large-scale environments.”</p>
+</div>
+</section>
+<section id="real-world-use-of-assets" class="slide level2 smaller scrollable">
+<h2>Real world use of assets</h2>
+<p><video id="video_shortcode_videojs_video1" width="900" height="540" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="imgs/the_eternauts_vfx_breakdown.mp4"></video> <iframe data-external="1" src="https://www.youtube.com/embed/jkah3djGJ7g" width="900" height="540" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></p>
+</section></section>
+<section>
+<section id="asset-lifecycle" class="title-slide slide level1 smaller center">
+<h1>Asset Lifecycle</h1>
+<div class="fragment fade-in">
+<p><img data-src="imgs/concepttoprod.png" style="width:69.0%"></p>
+</div>
+</section>
+<section id="general-cycle-of-a-3d-asset" class="slide level2 smaller">
+<h2>General Cycle of a 3D asset</h2>
+<pre><code>Concept → Modeling → Texturing → Rigging → LookDev → Approval → Publishing → Integration → Final Render
+                         ↑                 ↓
+                    Versioning ← QA/Feedback ← Revisions</code></pre>
+</section>
+<section id="art-directing-assets" class="slide level2">
+<h2>Art Directing Assets</h2>
+<p>Art directing an asset is the process of shaping its design, form, style, and visual qualities through feedback and decision-making by an art director, ensuring it fits the visual language and narrative tone of the production.</p>
+</section>
+<section id="caching" class="slide level2 smaller">
+<h2>Caching</h2>
+<p>Caching is saving a snapshot of the work.</p>
+</section>
+<section id="versioning" class="slide level2">
+<h2>Versioning</h2>
+<p>Asset production is iterative, with changes tracked and managed systematically.</p>
+</section>
+<section id="publishing" class="slide level2">
+<h2>Publishing</h2>
+<p>Publihing is the act of finalizing and distributing an asset for downstream use.</p>
+<div class="fragment fade-in">
+<p>An artist/department in the pipeline publishes a version of the asset. The the feedback cycle might give a retake on the asset or approve it.</p>
+</div>
+<ul>
+<li class="fragment">Artist Fidelity</li>
+<li class="fragment">Performance Optimization</li>
+<li class="fragment">Asset approval leads, supervisors, directors.</li>
+</ul>
+</section>
+<section id="feedback-cycle" class="slide level2 smaller">
+<h2>Feedback Cycle</h2>
+
+<img data-src="./imgs/asset_feedback_cycle.png" class="quarto-figure quarto-figure-center r-stretch"><p>Approval Conditions:<br>
+</p>
+<ul>
+<li>✅ Approved → Asset is published</li>
+<li>🔁 Retake → Feedback is passed down the chain for revision</li>
+<li>📌 Conditional Approval → Used but flagged for future fixes</li>
+</ul>
+</section>
+<section id="asset-status-tracking" class="slide level2 smaller">
+<h2>Asset Status Tracking</h2>
+<p><img data-src="https://www.cg-wire.com/_nuxt/kitsu-start.f8deb93a.png%20width=%22400%22" alt="Kitsu">{.fig-align=“center” }</p>
+</section></section>
+<section>
+<section id="file-structure-and-naming-conventions" class="title-slide slide level1 smaller center">
+<h1>File Structure and Naming Conventions</h1>
+<pre><code>{show}/{seq}/{shot}/assets/{asset_type}/{asset_name}/v###/&lt;asset_name_version.extension&gt;)</code></pre>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+</section></section>
+<section>
+<section id="pipeline-tools" class="title-slide slide level1 center">
+<h1>Pipeline Tools</h1>
+
+</section>
+<section id="job-schedulers" class="slide level2 smaller scrollable">
+<h2>Job Schedulers</h2>
+<p><img data-src="https://flamenco.blender.org/images/flamenco_screenshot_01.webp" alt="Flamenco"> <img data-src="https://prism-pipeline.com/wp-content/uploads/2018/03/RH004c.jpg" alt="Pandora"></p>
+</section></section>
+<section>
+<section id="modelling-pipeline" class="title-slide slide level1 center">
+<h1>Modelling Pipeline</h1>
+
+</section>
+<section id="methods" class="slide level2">
+<h2>Methods</h2>
+</section>
+<section id="topology-standards" class="slide level2">
+<h2>Topology Standards</h2>
+</section>
+<section id="dccs" class="slide level2">
+<h2>DCCs</h2>
+</section></section>
+<section>
+<section id="texturing-pipeline" class="title-slide slide level1 center">
+<h1>Texturing Pipeline</h1>
+
+</section>
+<section id="methods-1" class="slide level2">
+<h2>Methods</h2>
+</section>
+<section id="udim-workflows" class="slide level2">
+<h2>UDIM Workflows</h2>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p><a href="https://?meta:prerelease-subdomainquarto.org">https://<strong>?meta:prerelease-subdomain</strong>quarto.org</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="session01_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="session01_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="session01_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="session01_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="session01_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="session01_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="session01_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="session01_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="session01_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="session01_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="session01_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":false},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>videojs(video_shortcode_videojs_video1);</script>
+    
+
+</body></html>
