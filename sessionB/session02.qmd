@@ -1,0 +1,53 @@
+---
+title: "Photogrammetry Pipeline"
+subtitle: "ddfsdf"
+---
+
+# Photograph To 3D Model Workflow {.smaller}
+
+```{mermaid}
+
+---
+config:
+  flowchart:
+    htmlLabels: false
+---
+graph LR
+    A[**Image Acquisition**] --> B[**Image Cleaning**]
+    B --> C[**Point Cloud Generation**]
+    C --> D[**Mesh Building**]
+    D --> E[**Texture Space Calculations**]
+    E --> F[**Clean Up**]
+    F --> G[**Export**]
+```
+
+# Stage 1: Image Acquisition
+
+## Photograph
+Capture high-quality, overlapping images of an object or scene from multiple angles, ensuring good lighting and coverage.
+
+
+## Image VS Video
+
+
+# Stage 2: Image Cleaning
+Preprocess images by correcting exposure, removing noise, or masking unwanted areas to improve quality for processing.
+
+
+# Stage 3: Point Cloud Generation
+Use software to process images and generate a 3D point cloud algorithms.
+
+:::{.incremental}
+- Structure from motion (sfm)
+:::
+
+# Stage 4: Mesh Building
+Convert the point cloud into a 3D mesh by triangulating points, creating a surface model.
+
+# Stage 5: Texture Space
+Project and map image data onto the mesh to create a UV texture map, ensuring proper alignment and detail.
+
+# Stage 6: Clean Up
+Refine the mesh by removing artifacts, filling holes, smoothing surfaces, or reducing polygon count for optimization.
+
+# Stage 7: Export

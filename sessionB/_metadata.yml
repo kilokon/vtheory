@@ -1,0 +1,6 @@
+format:
+  revealjs:
+    theme: league
+    menu: true
+    progress: true
+search: false
