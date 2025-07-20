@@ -1,9 +1,108 @@
 ---
-title: "Photogrammetry Pipeline"
-subtitle: "ddfsdf"
+title: "3D Reconstruction"
+subtitle: "Methodologies for Implementing 3D Reconstruction Techniques within VFX and Animation Asset Pipelines."
+link-citations: true
+---
+# Introduction 
+## What is 3D Reconstruction? {.smaller}
+![Optical Stereo Plotter](https://jerrymahun.com/images/open_access/photo/stereo/stereoplotter/kelsh.png)
+
+- Process of capturing and recreating real-world objects/environments in digital 3D space
+- Bridge between physical reality and digital assets
+- Essential for modern VFX, animation, and virtual production
+
+## Classification {.smaller}
+
+3D reconstruction methods are classified into passive and active. 
+
+- Passive methods do not involve interaction with the object, whereas, 
+- Active methods use contact or a projection of some form of energy onto the object.
+
+![TF-Luna Lidar](https://images.squarespace-cdn.com/content/v1/59b037304c0dbfb092fbe894/1611253996242-5ZPPBSX71HLPURCWHJYK/TF_Luna_w_raspberrypi4.JPG?format=2500w){fig-align="left" width="380"}
+![Camera Reconstruction](https://user-images.githubusercontent.com/6337894/43038268-3ca9ca60-8d0e-11e8-9c63-1d01348205c8.png){ width="300"}
+
+# Spatial Mapping{.smaller .center}
+
+Spatial mapping is a very broad field that encompasses various techniques for capturing, processing, and visuali
+
+ - Direct Measurement Techniques 
+ - Indirect Measurement Techniques (Remote Sensing)
+
+## Direct Measurement Techniques{.smaller .center}
+These involve physically measuring points or features in space using instruments.
+
+- Surveying (Terrestrial): Using total stations, GPS/GNSS receivers, leveling equipment to directly measure coordinates on the ground.
+- LiDAR (Light Detection and Ranging): Using pulsed lasers to measure distances and create highly accurate point clouds. This is an active sensing method.
+- Sonar: Using sound waves for underwater mapping.
+
+![](https://pubs.usgs.gov/of/2004/1451/graphics/brown/fig3.jpg){fig-align="center" height="280" width="400"}
+![](https://www.wesmar.com/up-files/HD860-1.png){fig-align="left" height="280" width="400"}
+
+
+## Indirect Measurement Techniques (Remote Sensing) {.smaller}
+- Photogrammetry: It uses passive optical imagery (photographs or video) to derive 3D information. It relies on the principles of triangulation from overlapping images.
+  - Aerial Photogrammetry: Images captured from airborne platforms (drones, aircraft).
+  - Terrestrial (Close-Range) Photogrammetry: Images captured from ground level (handheld, tripod-mounted).
+  - Satellite Photogrammetry: Images captured from satellites.
+- Radar/SAR (Synthetic Aperture Radar): Uses microwave radiation to create images and elevation models, often through clouds or at night.
+- Thermal Imaging: Captures infrared radiation to detect heat signatures.
+
+
+
+# Active Reconstruction {.smaller}
+![](https://car-images.bauersecure.com/wp-images/152801/1056x594/argo_ai_lidar_readout.jpg)
+
+# Simultaneous Localization and Mapping (SLAM) {.smaller}
+- Almost Realtime Feature Tracking.
+- Localization to find where I (camera) am.
+- Mapping to to find what's around me.
+
+# Passive Reconstruction {.smaller}
+ Uses ambient light (natural or existing illumination) to reconstruct 3D geometry without emitting any signals.
+![](https://simonplanzer.com/articles/meshroom/cameras_huaeb0ff823db5dc1cbb2758cd362012a1_436157_1000x0_resize_box_2.png)
+
 ---
 
-# Photograph To 3D Model Workflow {.smaller}
+<iframe title="St. Barbara's Church, Kutná Hora" frameborder="0" width="960" height="540" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/c9e86d8fa06b40e5b2659bbc31ca9223/embed"> </iframe>
+
+
+# Reconstruction Algorithms {.smaller}
+:::{.incremental}
+- Neural Radiance Fields	(NeRF)
+- Multiplane Images (MPI)
+- 3D Gaussian Splatting (Gaussian Splatting)
+- Structure-from-Motion (SfM)
+- Multi-View Stereo (MVS)
+:::
+
+## Structure from Motion (SfM) {.smaller}
+- Feature detection and matching (SIFT, ORB)
+- Bundle adjustment for camera poses
+- Sparse point cloud generation
+- Popular tools: COLMAP, Agisoft Metashape
+
+![](https://www.researchgate.net/publication/269327935/figure/fig2/AS:310455139618817@1451029681414/Structure-from-Motion-SfM-process-is-illustrated-The-structure-in-the.png){fig-align="center"}
+
+## Multi-View Stereo (MVS){.smaller}
+- Dense stereo matching
+- Depth map fusion
+- Dense point cloud generation
+- Mesh reconstruction via Poisson surface reconstruction
+
+::: {.border}
+{{< video https://youtu.be/iellGrlNW7k align="center" width="550" height="375" >}}
+:::
+
+## Neural Radiance Fields (NeRF) {.smaller}
+- Implicit neural representation
+- Volume rendering with neural networks
+- Continuous scene representation
+- Recent variants: Instant-NGP, Mip-NeRF, NeRF-W
+
+![Mip-NeRF](https://ar5iv.labs.arxiv.org/html/2111.12077/assets/figures/gardenvase/dist_360_mipnerf.png)
+
+# Photogrammetry {.center .smaller}
+Photogrammetry is a three-dimensional measurement technique that uses central projection imaging as its fundamental mathematical model. It derives spatial information about objects and environments by analyzing overlapping photographs taken from different viewpoints.
 
 ```{mermaid}
 
@@ -16,21 +115,118 @@ graph LR
     A[**Image Acquisition**] --> B[**Image Cleaning**]
     B --> C[**Point Cloud Generation**]
     C --> D[**Mesh Building**]
-    D --> E[**Texture Space Calculations**]
+    D --> E[**Texture Refinement**]
     E --> F[**Clean Up**]
     F --> G[**Export**]
+    G --> H[**Re-Lighting**]
+    H --> I[**Rendering**]
+    E --> J[**Texture Components**]
+    J --> I
+
 ```
 
-# Stage 1: Image Acquisition
+# Stage 1: Image Acquisition {.smaller .center}
+The shooting quality is the most important and challenging part of the process. It has dramatic impacts on the quality of the final mesh.
 
-## Photograph
-Capture high-quality, overlapping images of an object or scene from multiple angles, ensuring good lighting and coverage.
+![](https://blog.sketchfab.com/wp-content/uploads/2019/02/image8-3.png){fig-align="center" height="400" width="500"}
+
+## Camera Selection{.smaller}
+
+- DSLR/Mirrorless cameras for high-resolution capture
+- Smartphone cameras for quick capture (limitations)
+- 360° cameras for environment capture
+- Specialized rigs for consistent positioning
+
+![](https://images.squarespace-cdn.com/content/v1/61c4a90f724d79385b3a744d/1664302417177-LQYMS6V73U8AEA6OSK3B/IMG_0032.jpg){fig-align="center"}
+
+## Lighting Considerations {.smaller}
+- Consistent, diffused lighting preferred
+- Avoid harsh shadows and reflections
+- Use polarizing filters to reduce glare
+- HDR bracketing for challenging Lighting
+
+![](https://i.ytimg.com/vi/9wnmeoBEfzs/maxresdefault.jpg){fig-align="center"}
+
+## Photograph{.smaller}
+
+- Keep the subject on the center of the framing
+- Sharp images without motion blur and without depth blur
+- Reduced ISO
+- Reduced Aperture(high f-number)
+- Fast Shutter Speed
+- Be redundant: the more photos you take, the better results you will get
+
+![Parallel Axis Capture](https://www.3dflow.net/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2013/12/photogrammetry_parallax.png.webp){fig-align="center" width="500"}
+![Central Axis Capture](https://www.3dflow.net/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2013/12/photogrammetry_convergent.png.webp){fig-align="left" width="500"}
+
+## Coverage Patterns{.smaller}
+- Ring pattern for objects
+- Grid pattern for large surfaces
+- Spiral pattern for complex geometry
+- 60-80% overlap between adjacent images
+
+![](https://github.com/Fyusion/LLFF/raw/master/imgs/capture.gif)
+
+## Horizontal/Vertical Field of View {.smaller}
+
+:::: {.columns}
+
+:::{.column}
+_**Landscape (Horizontal) Orientation:**_
+
+- Better for environmental captures
+:::
+
+:::{.column}
+_**Portrait (Vertical) Orientation:**_
+
+- Better for props and taller objects
+:::
+
+::::
 
 
-## Image VS Video
+:::{.incremental}
+- Strategic Orientation Choice
+- Mixed Orientation workflows
+:::
 
+![](https://tse3.mm.bing.net/th/id/OIP.4pOESIrzR5fz9oSStXh9YgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3){fig-align="center"}
+
+## Image Resolution
+
+## Color Settings
+- Exposure
+- Tone Mapping
+
+## Image VS Video {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+_**Image-Based Capture Advantages**_
+
+- No compression artifacts
+- Complete sensor utilization
+- Precise exposure control
+- Better calibration
+- No Motion Blur
+:::
+
+:::{.column width="50%"}
+_**Video-Based Capture Advantages**_
+
+- Faster acquisition
+- Locked exposure/focus
+- Motion analysis done by temporal reconstruction techniques
+- Easier to shoot
+- Real-time feedback
+:::
+
+::::
 
 # Stage 2: Image Cleaning
+
 Preprocess images by correcting exposure, removing noise, or masking unwanted areas to improve quality for processing.
 
 
@@ -51,3 +247,161 @@ Project and map image data onto the mesh to create a UV texture map, ensuring pr
 Refine the mesh by removing artifacts, filling holes, smoothing surfaces, or reducing polygon count for optimization.
 
 # Stage 7: Export
+
+# Gaussian Splatting
+ A machine learning technique that learns how the scene looks from different angles using neural networks.
+
+```{mermaid}
+---
+config:
+  flowchart:
+    htmlLabels: false
+---
+graph LR
+    A[**Image Acquisition**] --> B[**Point Cloud Initialization SfM**]
+    A --> C[**Camera Registrations**]
+    B --> D[**Convert to Gaussians**]
+    C --> D[**Convert to Gaussians**]
+    D --> E[**Differentiable Optimization**]
+    E --> F[**Splat-Based Rendering**]
+    F --> G[**Real-Time View Synthesis**]
+    G --> H[**Export**]
+
+```
+
+## Stage 1: Image Acquisition
+
+## Stage 2: Camera Registrations
+
+## Stage 3: 
+
+# NeRF
+Faster way to render 3D scenes using thousands of fuzzy balls (3D Gaussians) instead of a neural net.
+
+```{mermaid}
+---
+config:
+  flowchart:
+    htmlLabels: false
+---
+graph LR
+  A[**Image Acquisition**] --> B[**Camera Calibration**]
+  B --> C[**Pose Estimation COLMAP/Manual**]
+  C --> D[**Train NeRF Model**]
+  D --> E[**Volume Rendering**]
+  E --> F[**Novel View Synthesis**]
+F --> G[**Export**]
+
+```
+# Professional Software Tools {.smaller}
+## Commercial Solutions
+- **Agisoft Metashape**: Industry standard for photogrammetry
+- **RealityCapture**: Fast processing, node-based workflow
+- **Pix4D**: Aerial and terrestrial mapping
+- **3DF Zephyr**: Affordable alternative
+
+## Open Source Tools
+- **COLMAP**: Academic-grade SfM/MVS
+- **OpenMVG + OpenMVS**: Modular pipeline
+- **MeshRoom**: Alembic's open-source solution
+- **Regard3D**: User-friendly interface
+
+## Specialized Tools
+- **Luma AI**: AI-powered mobile capture
+- **Polycam**: Mobile LiDAR integration
+- **NVIDIA Instant NGP**: Real-time NeRF training
+
+
+# VFX Pipeline Integration {.smaller}
+
+```
++── images
+│   +── image1.jpg
+│   +── image2.jpg
+│   +── ...
++── sparse
+│   +── cameras.txt
+│   +── images.txt
+│   +── points3D.txt
++── stereo
+│   +── consistency_graphs
+│   │   +── image1.jpg.photometric.bin
+│   │   +── image2.jpg.photometric.bin
+│   │   +── ...
+│   +── depth_maps
+│   │   +── image1.jpg.photometric.bin
+│   │   +── image2.jpg.photometric.bin
+│   │   +── ...
+│   +── normal_maps
+│   │   +── image1.jpg.photometric.bin
+│   │   +── image2.jpg.photometric.bin
+│   │   +── ...
+│   +── patch-match.cfg
+│   +── fusion.cfg
++── fused.ply
++── meshed-poisson.ply
++── meshed-delaunay.ply
++── run-colmap-geometric.sh
++── run-colmap-photometric.sh
+```
+
+
+## Asset Standards
+- Naming conventions
+- File formats (USD, Alembic, FBX)
+- Level of detail (LOD) requirements
+- Texture map standards (Albedo, Normal, Roughness)
+
+## Workflow Optimization
+- Automated processing scripts
+- Cloud-based processing
+- Quality control checkpoints
+- Version control systems
+
+## Delivery Formats
+- High-resolution hero assets
+- Optimized game-ready meshes
+- Point clouds for previz
+- Environment maps and Lighting
+
+# Industry Case Studies {.smaller}
+## Film & TV Examples
+- **The Mandalorian**: Virtual production environments
+- **Blade Runner 2049**: Photogrammetry for environments
+- **Game of Thrones**: Castle and landscape recreation
+
+## Technical Achievements
+- Real-time capture and processing
+- AI-enhanced reconstruction
+- Mobile device capabilities
+- Cloud-based workflows
+
+## Future Trends
+- Real-time neural rendering
+- Mobile LiDAR integration
+- AI-powered texture synthesis
+- Automated asset optimization
+
+# Conclusion 
+Adhering to these requirements and understanding the underlying principles and algorithms, 
+teams can efficiently capture and reconstruct real-world data, significantly enhancing the
+realism and efficiency of digital content creation.
+
+
+# Final Thought
+Understanding these new 3D reconstruction paradigms (NeRF, Gaussian Splatting) isn't just
+about learning new tools; it's about understanding the future of digital asset creation 
+and real-time rendering. 
+
+# Bibliography
+@cite1: https://jerrymahun.com/index.php/home/open-access/54-xii-photogrammetry/404-g-stereoplotters?showall=1
+@cite2: https://pubs.usgs.gov/of/2004/1451/brown/index.html
+@cite3: https://www.b-29s-over-korea.com/aerial%20photography/aerial%20photography-pg3.html
+
+
+@article{mildenhall2019llff,
+  title={Local Light Field Fusion: Practical View Synthesis with Prescriptive Sampling Guidelines},
+  author={Ben Mildenhall and Pratul P. Srinivasan and Rodrigo Ortiz-Cayon and Nima Khademi Kalantari and Ravi Ramamoorthi and Ren Ng and Abhishek Kar},
+  journal={ACM Transactions on Graphics (TOG)},
+  year={2019},
+}
