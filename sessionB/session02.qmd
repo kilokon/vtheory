@@ -194,6 +194,11 @@ _**Portrait (Vertical) Orientation:**_
 ![](https://tse3.mm.bing.net/th/id/OIP.4pOESIrzR5fz9oSStXh9YgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3){fig-align="center"}
 
 ## Image Resolution
+:::{.incremental}
+- Pixels in the image
+:::
+
+![](https://cdna.artstation.com/p/marketplace/presentation_assets/000/056/122/large/file.JPG?1544374236)
 
 ## Color Settings
 - Exposure
@@ -243,8 +248,12 @@ Convert the point cloud into a 3D mesh by triangulating points, creating a surfa
 # Stage 5: Texture Space
 Project and map image data onto the mesh to create a UV texture map, ensuring proper alignment and detail.
 
+![Marmoset Toolbag](https://marmoset.co/wp-content/uploads/2021/02/11-JamesBusby-Marmoset-Lighting-setup-1200x656.jpg){fig-align="center"}
+
 # Stage 6: Clean Up
 Refine the mesh by removing artifacts, filling holes, smoothing surfaces, or reducing polygon count for optimization.
+
+![Instant Meshes](https://www.blendernation.com/wp-content/uploads/2015/11/screenshot-768x498.jpg){fig-align="center"}
 
 # Stage 7: Export
 
@@ -273,7 +282,9 @@ graph LR
 
 ## Stage 2: Camera Registrations
 
-## Stage 3: 
+## Stage 3: Point Cloud Initialization 
+
+## Stage 3: Splatting 
 
 # NeRF
 Faster way to render 3D scenes using thousands of fuzzy balls (3D Gaussians) instead of a neural net.
@@ -344,7 +355,6 @@ F --> G[**Export**]
 +── run-colmap-geometric.sh
 +── run-colmap-photometric.sh
 ```
-
 
 ## Asset Standards
 - Naming conventions
